@@ -16,39 +16,39 @@ class ZodiacSigns::CLI
     input = nil
     while input != "exit"
       input = gets.strip.delete "."
-      case input
-      when "1"
-        puts "Aries"
-      when "2"
-        puts "Taurus"
-      when "3"
-        puts "Gemini"
-      when "4"
-        puts "Cancer"
-      when "5"
-        puts "Leo"
-      when "6"
-        puts "Virgo"
-      when "7"
-        puts "Libra"
-      when "8"
-        puts "Scorpio"
-      when "9"
-        puts "Sagittarius"
-      when "10"
-        puts "Capricorn"
-      when "11"
-        puts "Aquarius"
-      when "12"
-        puts "Pisces"
-      else
+
+      zodiac = ZodiacSigns::Sign.find(input)
+
+      print_sign(sign)
+
+      puts "Would you like to see today's horoscope? Enter Y or N"
+
+      input = gets.strip.downcase
+      if input == "y"
+        menu
+      elsif input == "n"
+        puts ""
+        puts "Type \'menu\' to see other signs or type \'exit\' to end the app?"
+          input = gets.strip.downcase
+          if input == "menu"
+            menu
+          elsif input == "exit"
+            ending
+          else
+            puts ""
+            puts "I don't understand that answer."
+            start
+          end
+      end
+
         puts "Please enter 1 - 12, or type exit."
       end
     end
   end
 
   def ending
-    puts "Tap into your power and make your day great!"
+    puts "Remember to tap into your power and make your day great!"
+    puts "See you!"
   end
 
 end
