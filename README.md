@@ -1,6 +1,6 @@
 # ZodiacSigns
 
-Find out your zodiac sign, learn more about your sign and check out today's horoscope.
+Find out how awesome your sign is and check out today's horoscope.
 
 ## Installation
 
