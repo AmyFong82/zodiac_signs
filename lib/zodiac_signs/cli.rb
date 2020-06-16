@@ -1,5 +1,7 @@
 class ZodiacSigns::CLI
 
+  BASE_PATH = "https://www.horoscope.com/zodiac-signs"
+
   def call
     greeting
     menu
@@ -10,8 +12,8 @@ class ZodiacSigns::CLI
     puts "Welcome! Discover your strength and get ready for the day!"
   end
 
-  def menu()
-    puts "12 Zodiac Signs"
+  def print_menu
+    zodiac_signs = ZodiacSigns::Sign.scrape_index_page(BASE_PATH)
     puts "Please enter the number of your zodiac sign from the list above:"
     input = nil
     while input != "exit"
