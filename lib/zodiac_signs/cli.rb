@@ -4,7 +4,7 @@ class ZodiacSigns::CLI
 
   def call
     greeting
-    menu
+    print_menu
     ending
   end
 
@@ -13,37 +13,25 @@ class ZodiacSigns::CLI
   end
 
   def print_menu
-    zodiac_signs = ZodiacSigns::Sign.scrape_index_page(BASE_PATH)
+    zodiac_signs = ZodiacSigns::Scraper.scrape_index_page(BASE_PATH)
     puts "Please enter the number of your zodiac sign from the list above:"
     input = nil
     while input != "exit"
       input = gets.strip.delete "."
-
       zodiac = ZodiacSigns::Sign.find(input)
-
       print_sign(sign)
-
-      puts "Would you like to see today's horoscope? Enter Y or N"
-
+      puts "Would you like to see another sign? Y or N"
       input = gets.strip.downcase
       if input == "y"
-        menu
+        print_menu
       elsif input == "n"
+        ending
+      elsif input == "exit"
+        ending
+      else
         puts ""
-        puts "Type \'menu\' to see other signs or type \'exit\' to end the app?"
-          input = gets.strip.downcase
-          if input == "menu"
-            menu
-          elsif input == "exit"
-            ending
-          else
-            puts ""
-            puts "I don't understand that answer."
-            start
-          end
-      end
-
-        puts "Please enter 1 - 12, or type exit."
+        puts "I don't understand that answer."
+        puts "Please type \'Y\' for to see the main menu, or type \'N\' to exit."
       end
     end
   end
