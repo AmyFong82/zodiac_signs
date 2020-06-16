@@ -4,14 +4,15 @@ class ZodiacSigns::Scraper
     doc = Nokogiri::HTML(open(index_url))
     signs = []
 
-    doc.css(".swipe-container.text-center").each do |sign|
+    doc.css(".swipe-container.text-center a").each do |sign|
       sign_hash= {}
-      sign_hash[:name] = sign.css("h3").text.strip
+      sign_hash[:name] = sign.css("h3").text.strip.split(/\s/)[0]
+      sign_hash[:dates] = sign.css("p").first.text.strip
+      sign_hash[:url] = sign.css("a")
       binding.pry
-      sign_hash[:dates] = sign.css(".student-location").text.strip
-      sign_hash[:url] = sign.css("a").first['href']
+
       sign_hash[:traits] = sign.css("a").first['href']
-      students << student_hash
+      signs << sign_hash
     end
     students
   end
