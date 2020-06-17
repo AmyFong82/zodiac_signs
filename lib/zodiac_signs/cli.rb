@@ -53,6 +53,24 @@ class ZodiacSigns::CLI
     end
   end
 
+  def print_sign(sign)
+  puts ""
+  puts "----------- Dear #{sign.name} -----------"
+  puts ""
+  puts "#{sign.symbol} | #{sign.dates}"
+  puts ""
+  puts "You are #{sign.traits}"
+  puts ""
+  puts "Your Motto:"
+  puts "#{sign.motto}"
+  puts ""
+  puts "Your Greatest Gifts:"
+  puts "#{sign.gifts}"
+  puts ""
+  puts "Today's Horoscope:"
+  puts "#{sign.horoscope}"
+
+
   def ending
     puts "Remember to tap into your power and make your day great!"
     puts "See you!"
