@@ -27,9 +27,11 @@ class ZodiacSigns::CLI
 
   def print_menu
     make_signs
-    counter = 
+    ZodiacSigns::Sign.all.each.with_index(1) do |sign, index|
+        puts "#{index}. #{sign.name} - #{sign.dates}"
+    end
     puts ""
-    puts "Please enter the number of your zodiac sign from the list above:"
+    puts "Please enter the number of your zodiac sign from the list above."
     input = nil
     while input != "exit"
       input = gets.strip.delete "."
