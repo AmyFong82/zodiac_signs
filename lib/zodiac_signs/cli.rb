@@ -9,7 +9,8 @@ class ZodiacSigns::CLI
   end
 
   def greeting
-    puts "Welcome! Discover your strength and get ready for the day!"
+    puts "Welcome to Horoscope.com!"
+    puts "Discover your strength and get ready for the day!"
   end
 
   def make_signs
@@ -24,11 +25,11 @@ class ZodiacSigns::CLI
     end
   end
 
-
   def print_menu
     make_signs
     ZodiacSigns::Sign.all.each.with_index(1) do |sign, index|
-        puts "#{index}. #{sign.name} - #{sign.dates}"
+        puts "#{index.to_s.rjust(2)}. #{sign.name}: #{sign.dates}"
+
     end
     puts ""
     puts "Please enter the number of your zodiac sign from the list above."
