@@ -8,7 +8,7 @@ class ZodiacSigns::Scraper
         sign_hash= {}
         sign_hash[:name] = sign.css("h3").text.strip.split(/\s/)[0]
         sign_hash[:dates] = sign.css("p").first.text.strip
-        sign_hash[:url] = sign.css("a").first['href']
+        sign_hash[:url] = sign.attributes["href"].value
         sign_hash[:traits] = sign.css(".no-events p")[1].text.strip
         signs << sign_hash
       end
