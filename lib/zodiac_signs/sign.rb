@@ -9,12 +9,12 @@ class ZodiacSigns::Sign
   end
 
   def self.create_from_collection(signs_array)
-    students_array.each do |student|
-      Student.new(student)
+    signs_array.each do |sign|
+      Sign.new(sign)
     end
   end
 
-  def add_student_attributes(attributes_hash)
+  def add_sign_attributes(attributes_hash)
     attributes_hash.each {|key, value| self.send(("#{key}="), value)}
     self
   end
