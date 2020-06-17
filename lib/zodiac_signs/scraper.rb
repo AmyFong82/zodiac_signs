@@ -16,9 +16,9 @@ class ZodiacSigns::Scraper
       # binding.pry
     end
 
-  def self.scrape_details_page(profile_url)
-    doc = Nokogiri::HTML(open(profile_url))
-    student_profile = {}
+  def self.scrape_details_page(details_url)
+    doc = Nokogiri::HTML(open(details_url))
+    sign_details = {}
     social_links = doc.css(".social-icon-container a")
 
     counter = 0

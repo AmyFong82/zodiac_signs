@@ -23,19 +23,4 @@ class ZodiacSigns::Sign
     @@all
   end
 
-
-
-  def make_students
-  students_array = Scraper.scrape_index_page(BASE_PATH + 'index.html')
-  Student.create_from_collection(students_array)
-end
-
-def add_attributes_to_students
-  Student.all.each do |student|
-    attributes = Scraper.scrape_profile_page(BASE_PATH + student.profile_url)
-    student.add_student_attributes(attributes)
-  end
-end
-
-
 end

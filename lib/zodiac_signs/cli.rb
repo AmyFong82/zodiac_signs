@@ -4,6 +4,7 @@ class ZodiacSigns::CLI
 
   def call
     greeting
+    make_signs
     print_menu
     ending
   end
@@ -11,6 +12,19 @@ class ZodiacSigns::CLI
   def greeting
     puts "Welcome! Discover your strength and get ready for the day!"
   end
+
+  def make_signs
+    signs_array = Scraper.scrape_index_page(BASE_PATH)
+    Sign.create_from_collection(signs_array)
+  end
+
+  def add_attributes_to_signs
+    Sign.all.each do |sign|
+      attributes = Scraper.scrape_details_page(BASE_PATH + sign.url)
+      sign.add_sign_attributes(attributes)
+  end
+end
+
 
   def print_menu
     zodiac_signs = ZodiacSigns::Scraper.scrape_index_page(BASE_PATH)
