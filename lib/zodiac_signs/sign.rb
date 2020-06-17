@@ -23,4 +23,10 @@ class ZodiacSigns::Sign
     @@all
   end
 
+  def self.find(id)
+    index = id.to_i - 1
+    self.all[index]
+  end
+
+
 end

@@ -28,15 +28,14 @@ class ZodiacSigns::CLI
   def print_menu
     make_signs
     ZodiacSigns::Sign.all.each.with_index(1) do |sign, index|
-        puts "#{index.to_s.rjust(2)}. #{sign.name}: #{sign.dates}"
-
+      puts "#{index.to_s.rjust(2)}. #{sign.name}: #{sign.dates}"
     end
     puts ""
     puts "Please enter the number of your zodiac sign from the list above."
     input = nil
     while input != "exit"
       input = gets.strip.delete "."
-      zodiac = ZodiacSigns::Sign.find(input)
+      ZodiacSigns::Sign.find(input)
       print_sign(sign)
       puts "Would you like to see another sign? Y or N"
       input = gets.strip.downcase
