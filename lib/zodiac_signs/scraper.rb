@@ -13,10 +13,10 @@ class ZodiacSigns::Scraper
         signs << sign_hash
       end
       signs
-      binding.pry
+      # binding.pry
     end
 
-  def self.scrape_profile_page(profile_url)
+  def self.scrape_details_page(profile_url)
     doc = Nokogiri::HTML(open(profile_url))
     student_profile = {}
     social_links = doc.css(".social-icon-container a")
