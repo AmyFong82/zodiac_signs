@@ -35,7 +35,7 @@ class ZodiacSigns::CLI
     input = nil
     while input != "exit"
       input = gets.strip.delete "."
-      ZodiacSigns::Sign.find(input)
+      sign = ZodiacSigns::Sign.find(input)
       print_sign(sign)
       puts "Would you like to see another sign? Y or N"
       input = gets.strip.downcase
@@ -54,22 +54,22 @@ class ZodiacSigns::CLI
   end
 
   def print_sign(sign)
-  puts ""
-  puts "----------- Dear #{sign.name} -----------"
-  puts ""
-  puts "#{sign.symbol} | #{sign.dates}"
-  puts ""
-  puts "You are #{sign.traits}"
-  puts ""
-  puts "Your Motto:"
-  puts "#{sign.motto}"
-  puts ""
-  puts "Your Greatest Gifts:"
-  puts "#{sign.gifts}"
-  puts ""
-  puts "Today's Horoscope:"
-  puts "#{sign.horoscope}"
-
+    puts ""
+    puts "----------- Dear #{sign.name} -----------"
+    puts ""
+    puts "#{sign.symbol} | #{sign.dates}"
+    puts ""
+    puts "You are #{sign.traits}"
+    puts ""
+    puts "Your Motto:"
+    puts "#{sign.motto}"
+    puts ""
+    puts "Your Greatest Gifts:"
+    puts "#{sign.gifts}"
+    puts ""
+    puts "Today's Horoscope:"
+    puts "#{sign.horoscope}"
+  end
 
   def ending
     puts "Remember to tap into your power and make your day great!"
