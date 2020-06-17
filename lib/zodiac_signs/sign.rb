@@ -10,7 +10,7 @@ class ZodiacSigns::Sign
 
   def self.create_from_collection(signs_array)
     signs_array.each do |sign|
-      Sign.new(sign)
+      ZodiacSigns::Sign.new(sign)
     end
   end
 

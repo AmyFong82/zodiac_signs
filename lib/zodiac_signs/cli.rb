@@ -4,7 +4,6 @@ class ZodiacSigns::CLI
 
   def call
     greeting
-    make_signs
     print_menu
     ending
   end
@@ -14,20 +13,22 @@ class ZodiacSigns::CLI
   end
 
   def make_signs
-    signs_array = Scraper.scrape_index_page(BASE_PATH)
-    Sign.create_from_collection(signs_array)
+    signs_array = ZodiacSigns::Scraper.scrape_index_page(BASE_PATH)
+    ZodiacSigns::Sign.create_from_collection(signs_array)
   end
 
   def add_attributes_to_signs
-    Sign.all.each do |sign|
-      attributes = Scraper.scrape_details_page(BASE_PATH + sign.url)
+    ZodiacSigns::Sign.all.each do |sign|
+      attributes = ZodiacSigns::Scraper.scrape_details_page(BASE_PATH + sign.url)
       sign.add_sign_attributes(attributes)
+    end
   end
-end
 
 
   def print_menu
-    zodiac_signs = ZodiacSigns::Scraper.scrape_index_page(BASE_PATH)
+    make_signs
+    counter = 
+    puts ""
     puts "Please enter the number of your zodiac sign from the list above:"
     input = nil
     while input != "exit"
