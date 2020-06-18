@@ -22,9 +22,11 @@ class ZodiacSigns::Scraper
         sign_details = {}
         sign_details[:symbol] = sign.css(".header .title h4")[0].text.split(/\s[[:space:]]\|/)[0]
         sign_details[:moto] = sign.css("blockquote").text.strip
+        # sign_details[:gifts] = sign.css("h3")
+        sign_details[:gifts] = sign.css("h3").select{|this| this.text.include? ("Greatest Gifts")}
+        # news_links = page.css("a").select{|link| link['data-category'] == "news"}
         binding.pry
 
-        sign_details[:gifts] = sign.attributes["href"].value
         sign_details[:horoscope] = sign.css(".no-events p")[1].text.strip
         signs << sign_hash
     end
