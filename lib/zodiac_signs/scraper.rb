@@ -13,7 +13,6 @@ class ZodiacSigns::Scraper
         signs << sign_hash
       end
       signs
-      # binding.pry
     end
 
   def self.scrape_details_page(details_url)

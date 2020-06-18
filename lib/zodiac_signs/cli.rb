@@ -4,6 +4,7 @@ class ZodiacSigns::CLI
 
   def call
     greeting
+    make_signs
     print_menu
     ending
   end
@@ -27,7 +28,6 @@ class ZodiacSigns::CLI
   end
 
   def print_menu
-    make_signs
     ZodiacSigns::Sign.all.each.with_index(1) do |sign, index|
       puts "#{index.to_s.rjust(2)}. #{sign.name}: #{sign.dates}"
     end
@@ -55,6 +55,7 @@ class ZodiacSigns::CLI
   end
 
   def print_sign(sign)
+    # ZodiacSigns::Sign.all.find(sign)
     puts ""
     puts "----------- Dear #{sign.name} -----------".colorize(:green)
     puts ""

@@ -28,5 +28,4 @@ class ZodiacSigns::Sign
     self.all[index]
   end
 
-
 end
