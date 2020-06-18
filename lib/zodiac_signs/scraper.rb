@@ -6,7 +6,7 @@ class ZodiacSigns::Scraper
 
     doc.css(".swipe-container.text-center a").each do |sign|
         sign_hash= {}
-        sign_hash[:name] = sign.css("h3").text.strip.split(/\s/)[0]
+        sign_hash[:name] = sign.css("h3").text.split(/\s/)[0]
         sign_hash[:dates] = sign.css("p").first.text.strip
         sign_hash[:url] = sign.attributes["href"].value
         sign_hash[:traits] = sign.css(".no-events p")[1].text.strip
@@ -20,7 +20,7 @@ class ZodiacSigns::Scraper
 
     doc.css(".title").each do |sign|
         sign_details = {}
-        sign_details[:symbol] = sign.css("h4")[0].text.strip.split(/\&nbsp/)[0]
+        sign_details[:symbol] = sign.css("h4")[0].text.split(/\s[[:space:]]\|/)[0]
         binding.pry
         sign_hash[:dates] = sign.css("p").first.text.strip
         sign_hash[:url] = sign.attributes["href"].value

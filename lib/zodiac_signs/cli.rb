@@ -11,7 +11,7 @@ class ZodiacSigns::CLI
 
   def greeting
     puts "Welcome to Horoscope.com!".colorize(:light_blue)
-    puts "Discover your strength and get ready for the day!"
+    puts "Discover your strength and get ready for the day!".colorize(:light_blue)
   end
 
   def make_signs
@@ -19,20 +19,12 @@ class ZodiacSigns::CLI
     ZodiacSigns::Sign.create_from_collection(signs_array)
   end
 
-  def add_attributes_to_signs
-    ZodiacSigns::Sign.all.each do |sign|
-      attributes = ZodiacSigns::Scraper.scrape_details_page(BASE_PATH + sign.url)
-      binding.pry
-      sign.add_sign_attributes(attributes)
-    end
-  end
-
   def print_menu
     ZodiacSigns::Sign.all.each.with_index(1) do |sign, index|
       puts "#{index.to_s.rjust(2)}. #{sign.name}: #{sign.dates}"
     end
     puts ""
-    puts "Please enter the number of your zodiac sign from the list above."
+    puts "Please enter the number of your zodiac sign from the list above.".colorize(:light_blue)
     input = nil
     while input != "exit"
       input = gets.strip.delete "."
@@ -54,8 +46,15 @@ class ZodiacSigns::CLI
     end
   end
 
+  def add_attributes_to_signs
+    ZodiacSigns::Sign.all.each do |sign|
+      attributes = ZodiacSigns::Scraper.scrape_details_page(sign.url)
+      sign.add_sign_attributes(attributes)
+    end
+  end
+
   def print_sign(sign)
-    # ZodiacSigns::Sign.all.find(sign)
+    add_attributes_to_signs
     puts ""
     puts "----------- Dear #{sign.name} -----------".colorize(:green)
     puts ""
