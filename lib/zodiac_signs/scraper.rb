@@ -18,18 +18,38 @@ class ZodiacSigns::Scraper
   def self.scrape_details_page(details_url)
     doc = Nokogiri::HTML(open(details_url))
 
-    doc.css("main").each do |sign|
+    # doc.css("main").each do |sign|
         sign_details = {}
-        sign_details[:symbol] = sign.css(".header .title h4")[0].text.split(/\s[[:space:]]\|/)[0]
-        sign_details[:moto] = sign.css("blockquote").text.strip
+        sign_details[:symbol] = doc.css("main .header .title h4")[0].text.split(/\s[[:space:]]\|/)[0]
+        sign_details[:moto] = doc.css("blockquote").text.strip
         # sign_details[:gifts] = sign.css("h3")
-        sign_details[:gifts] = sign.css("h3").select{|this| this.text.include? ("Greatest Gifts")}
+        # Nokogiri::HTML(doc).xpath("//h3").each do |h3|
+        #   if h3.text.include? ("Greatest Gifts")
+        #     sign_details[:gifts] = h3.xpath("following-sibling::p").text
+        #   end
+        # end
+
+        # results = []
+        #
+        # Nokogiri::HTML(doc).xpath("//h3").each do |header|
+        #   p = header.xpath("following-sibling::p").text
+        #   results << [p]
+        # end
+        # gift_h3 = doc.css("h3").select{|this| this.text.include? ("Greatest Gifts")}
+        doc.css("h3").each do |this|
+          if this.text.include? ("Greatest Gifts")
+            sign_details[:gifts] = this.next_element.text
+          end
+        end
+        # gift_h3 = doc.xpath("//h3").select{|this| this.text.include? ("Greatest Gifts")}
+        # sign_details[:gifts] = gift_h3.xpath("following-sibling::p").text
+
+        # sign_details[:gifts] = sign.css(gift_h3).text.strip
         # news_links = page.css("a").select{|link| link['data-category'] == "news"}
         binding.pry
 
         sign_details[:horoscope] = sign.css(".no-events p")[1].text.strip
         signs << sign_hash
-    end
       signs
   end
 
