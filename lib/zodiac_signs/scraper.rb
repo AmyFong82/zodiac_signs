@@ -18,13 +18,14 @@ class ZodiacSigns::Scraper
   def self.scrape_details_page(details_url)
     doc = Nokogiri::HTML(open(details_url))
 
-    doc.css(".title").each do |sign|
+    doc.css("main").each do |sign|
         sign_details = {}
-        sign_details[:symbol] = sign.css("h4")[0].text.split(/\s[[:space:]]\|/)[0]
+        sign_details[:symbol] = sign.css(".header .title h4")[0].text.split(/\s[[:space:]]\|/)[0]
+        sign_details[:moto] = sign.css("blockquote").text.strip
         binding.pry
-        sign_hash[:dates] = sign.css("p").first.text.strip
-        sign_hash[:url] = sign.attributes["href"].value
-        sign_hash[:traits] = sign.css(".no-events p")[1].text.strip
+
+        sign_details[:gifts] = sign.attributes["href"].value
+        sign_details[:horoscope] = sign.css(".no-events p")[1].text.strip
         signs << sign_hash
     end
       signs
