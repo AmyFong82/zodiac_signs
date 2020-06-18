@@ -6,6 +6,7 @@ require_relative "./zodiac_signs/scraper"
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
+require 'colorize'
 
 module ZodiacSigns
   class Error < StandardError; end

@@ -9,7 +9,7 @@ class ZodiacSigns::CLI
   end
 
   def greeting
-    puts "Welcome to Horoscope.com!"
+    puts "Welcome to Horoscope.com!".colorize(:green)
     puts "Discover your strength and get ready for the day!"
   end
 
@@ -55,7 +55,7 @@ class ZodiacSigns::CLI
 
   def print_sign(sign)
     puts ""
-    puts "----------- Dear #{sign.name} -----------"
+    puts "----------- Dear #{sign.name} -----------".colorize(:green)
     puts ""
     puts "#{sign.symbol} | #{sign.dates}"
     puts ""
