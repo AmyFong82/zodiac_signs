@@ -9,7 +9,7 @@ class ZodiacSigns::CLI
   end
 
   def greeting
-    puts "Welcome to Horoscope.com!".colorize(:green)
+    puts "Welcome to Horoscope.com!".colorize(:light_blue)
     puts "Discover your strength and get ready for the day!"
   end
 
@@ -21,6 +21,7 @@ class ZodiacSigns::CLI
   def add_attributes_to_signs
     ZodiacSigns::Sign.all.each do |sign|
       attributes = ZodiacSigns::Scraper.scrape_details_page(BASE_PATH + sign.url)
+      binding.pry
       sign.add_sign_attributes(attributes)
     end
   end
@@ -72,8 +73,9 @@ class ZodiacSigns::CLI
   end
 
   def ending
-    puts "Remember to tap into your power and make your day great!"
+    puts "Remember to tap into your power and make your day great!".colorize(:light_blue)
     puts "See you!"
+    exit
   end
 
 end
