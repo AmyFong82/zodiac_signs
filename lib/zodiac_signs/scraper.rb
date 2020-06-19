@@ -30,18 +30,15 @@ class ZodiacSigns::Scraper
         end
 
         doc.css(".btn-skin.btn-purple").each do |link|
-        if link.text.include? ("today's horoscope")
-          sign_details[:horoscope] = link["href"]
-          binding.pry
-
+          if link.text.include? ("today's horoscope")
+             horoscope_page = Nokogiri::HTML(open(ZodiacSigns::CLI::BASE_PATH + link["href"]))
+             sign_details[:horoscope] = horoscope_page.css(".main-horoscope p")[0].text
+          end
         end
-      end
-
-        signs << sign_hash
-      signs
-  end
+        binding.pry
 
 
+    end
     # social_links = doc.css(".social-icon-container a")
     #
     # counter = 0
