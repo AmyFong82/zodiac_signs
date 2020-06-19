@@ -6,7 +6,6 @@ class ZodiacSigns::CLI
     greeting
     make_signs
     print_menu
-    ending
   end
 
   def greeting
