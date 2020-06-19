@@ -30,7 +30,7 @@ class ZodiacSigns::CLI
       input = gets.strip.delete "."
       sign = ZodiacSigns::Sign.find(input)
       print_sign(sign)
-      puts "Would you like to see another sign? Y or N"
+      puts "Would you like to see another sign? Y or N".colorize(:green)
       input = gets.strip.downcase
       if input == "y"
         print_menu
@@ -56,25 +56,25 @@ class ZodiacSigns::CLI
   def print_sign(sign)
     add_attributes_to_signs
     puts ""
-    puts "----------- Dear #{sign.name} -----------".colorize(:green)
+    puts "---------------------- Dear #{sign.name} ----------------------".colorize(:red)
     puts ""
     puts "Symbol: #{sign.symbol} | #{sign.dates}"
     puts ""
-    puts "You are #{sign.traits}"
+    puts "You are #{sign.traits}.".colorize(:red)
     puts ""
-    puts "Your Motto:"
+    puts "Your Motto:".colorize(:green)
     puts "#{sign.motto}"
     puts ""
-    puts "Your Greatest Gifts:"
+    puts "Your Greatest Gifts:".colorize(:green)
     puts "#{sign.gifts}"
     puts ""
-    puts "Today's Horoscope:"
+    puts "Today's Horoscope:".colorize(:green)
     puts "#{sign.horoscope}"
   end
 
   def ending
-    puts "Remember to tap into your power and make your day great!".colorize(:light_blue)
-    puts "See you!"
+    puts "Remember to tap into your power and make your day great!".colorize(:green)
+    puts "See you!".colorize(:green)
     exit
   end
 
