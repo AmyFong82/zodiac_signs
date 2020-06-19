@@ -18,44 +18,23 @@ class ZodiacSigns::Scraper
   def self.scrape_details_page(details_url)
     doc = Nokogiri::HTML(open(details_url))
 
-    # doc.css("main").each do |sign|
-        sign_details = {}
-        sign_details[:symbol] = doc.css("main .header .title h4")[0].text.split(/\s[[:space:]]\|/)[0]
-        sign_details[:moto] = doc.css("blockquote").text.strip
+    sign_details = {}
+    sign_details[:symbol] = doc.css("main .header .title h4")[0].text.split(/\s[[:space:]]\|/)[0]
+    sign_details[:motto] = doc.css("blockquote").text.strip
 
-        doc.css("h3").each do |this|
-          if this.text.include? ("Greatest Gifts")
-            sign_details[:gifts] = this.next_element.text
-          end
-        end
-
-        doc.css(".btn-skin.btn-purple").each do |link|
-          if link.text.include? ("today's horoscope")
-             horoscope_page = Nokogiri::HTML(open(ZodiacSigns::CLI::BASE_PATH + link["href"]))
-             sign_details[:horoscope] = horoscope_page.css(".main-horoscope p")[0].text
-          end
-        end
-        binding.pry
-
-
+    doc.css("h3").each do |this|
+      if this.text.include? ("Greatest Gifts")
+        sign_details[:gifts] = this.next_element.text
+      end
     end
-    # social_links = doc.css(".social-icon-container a")
-    #
-    # counter = 0
-    # while student_profile.length < social_links.length do
-    #   if social_links[counter]["href"].include?("twitter")
-    #     student_profile[:twitter] = social_links[counter]["href"]
-    #   elsif social_links[counter]["href"].include?("linkedin")
-    #     student_profile[:linkedin] = social_links[counter]["href"]
-    #   elsif social_links[counter]["href"].include?("github")
-    #     student_profile[:github] = social_links[counter]["href"]
-    #   else
-    #     student_profile[:blog] = social_links[counter]["href"]
-    #   end
-    #   counter += 1
-    # end
 
-    # student_profile[:profile_quote] = doc.css(".profile-quote").text.strip
-    # student_profile[:bio] = doc.css(".bio-content.content-holder p").text.strip.first(p)
-    # student_profile
+    doc.css(".btn-skin.btn-purple").each do |link|
+      if link.text.include? ("today's horoscope")
+         horoscope_page = Nokogiri::HTML(open(ZodiacSigns::CLI::BASE_PATH + link["href"]))
+         sign_details[:horoscope] = horoscope_page.css(".main-horoscope p")[0].text
+      end
+    end
+
+    sign_details
   end
+end

@@ -58,7 +58,7 @@ class ZodiacSigns::CLI
     puts ""
     puts "----------- Dear #{sign.name} -----------".colorize(:green)
     puts ""
-    puts "#{sign.symbol} | #{sign.dates}"
+    puts "Symbol: #{sign.symbol} | #{sign.dates}"
     puts ""
     puts "You are #{sign.traits}"
     puts ""
