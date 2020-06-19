@@ -1,6 +1,6 @@
 class ZodiacSigns::CLI
 
-  BASE_PATH = "https://www.horoscope.com/zodiac-signs"
+  BASE_PATH = "https://www.horoscope.com/"
 
   def call
     greeting
@@ -15,7 +15,7 @@ class ZodiacSigns::CLI
   end
 
   def make_signs
-    signs_array = ZodiacSigns::Scraper.scrape_index_page(BASE_PATH)
+    signs_array = ZodiacSigns::Scraper.scrape_index_page(BASE_PATH + "zodiac-signs")
     ZodiacSigns::Sign.create_from_collection(signs_array)
   end
 
