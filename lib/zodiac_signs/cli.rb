@@ -10,8 +10,8 @@ class ZodiacSigns::CLI
   end
 
   def greeting
-    puts "Welcome to Horoscope.com!".colorize(:light_blue)
-    puts "Discover your strength and get ready for the day!".colorize(:light_blue)
+    puts "Welcome to Horoscope.com!".colorize(:green)
+    puts "Discover your strength and get ready for the day!".colorize(:green)
   end
 
   def make_signs
@@ -24,7 +24,7 @@ class ZodiacSigns::CLI
       puts "#{index.to_s.rjust(2)}. #{sign.name}: #{sign.dates}"
     end
     puts ""
-    puts "Please enter the number of your zodiac sign from the list above.".colorize(:light_blue)
+    puts "Please enter the number of your zodiac sign from the list above.".colorize(:green)
     input = nil
     while input != "exit"
       input = gets.strip.delete "."
