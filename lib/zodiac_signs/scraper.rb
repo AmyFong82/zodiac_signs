@@ -22,33 +22,21 @@ class ZodiacSigns::Scraper
         sign_details = {}
         sign_details[:symbol] = doc.css("main .header .title h4")[0].text.split(/\s[[:space:]]\|/)[0]
         sign_details[:moto] = doc.css("blockquote").text.strip
-        # sign_details[:gifts] = sign.css("h3")
-        # Nokogiri::HTML(doc).xpath("//h3").each do |h3|
-        #   if h3.text.include? ("Greatest Gifts")
-        #     sign_details[:gifts] = h3.xpath("following-sibling::p").text
-        #   end
-        # end
 
-        # results = []
-        #
-        # Nokogiri::HTML(doc).xpath("//h3").each do |header|
-        #   p = header.xpath("following-sibling::p").text
-        #   results << [p]
-        # end
-        # gift_h3 = doc.css("h3").select{|this| this.text.include? ("Greatest Gifts")}
         doc.css("h3").each do |this|
           if this.text.include? ("Greatest Gifts")
             sign_details[:gifts] = this.next_element.text
           end
         end
-        # gift_h3 = doc.xpath("//h3").select{|this| this.text.include? ("Greatest Gifts")}
-        # sign_details[:gifts] = gift_h3.xpath("following-sibling::p").text
 
-        # sign_details[:gifts] = sign.css(gift_h3).text.strip
-        # news_links = page.css("a").select{|link| link['data-category'] == "news"}
-        binding.pry
+        doc.css(".btn-skin.btn-purple").each do |link|
+        if link.text.include? ("today's horoscope")
+          sign_details[:horoscope] = link["href"]
+          binding.pry
 
-        sign_details[:horoscope] = sign.css(".no-events p")[1].text.strip
+        end
+      end
+
         signs << sign_hash
       signs
   end
