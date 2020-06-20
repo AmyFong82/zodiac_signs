@@ -24,9 +24,8 @@ class ZodiacSigns::CLI
     end
     puts ""
     puts "Please enter the number of your zodiac sign from the list above.".colorize(:green)
-    input = nil
+    input = gets.strip.delete "."
     while input != "exit"
-      input = gets.strip.delete "."
       sign = ZodiacSigns::Sign.find(input)
       print_sign(sign)
       puts "Would you like to see another sign? Y or N".colorize(:green)
@@ -45,15 +44,19 @@ class ZodiacSigns::CLI
     end
   end
 
-  def add_attributes_to_signs
-    ZodiacSigns::Sign.all.each do |sign|
+  def add_attributes_to_sign(sign)
       attributes = ZodiacSigns::Scraper.scrape_details_page(sign.url)
       sign.add_sign_attributes(attributes)
-    end
   end
+  # def add_attributes_to_signs
+  #   ZodiacSigns::Sign.all.each do |sign|
+  #     attributes = ZodiacSigns::Scraper.scrape_details_page(sign.url)
+  #     sign.add_sign_attributes(attributes)
+  #   end
+  # end
 
   def print_sign(sign)
-    add_attributes_to_signs
+    add_attributes_to_sign(sign)
     puts ""
     puts "---------------------- Dear #{sign.name} ----------------------".colorize(:red)
     puts ""
@@ -69,6 +72,7 @@ class ZodiacSigns::CLI
     puts ""
     puts "Today's Horoscope:".colorize(:green)
     puts "#{sign.horoscope}"
+    puts ""
   end
 
   def ending
