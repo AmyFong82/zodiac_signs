@@ -34,10 +34,10 @@ class ZodiacSigns::CLI
       print_sign(sign)
       puts "Would you like to see another sign? Y or N".colorize(:green)
       input = gets.strip.downcase
-      until input == "y" or input == "n"
+      until input == "y" or input == "n" or input == "exit"
         puts ""
-        puts "I don't understand that answer."
-        puts "Please type \'Y\' for to see the main menu, or type \'N\' to exit."
+        puts "I don't understand that answer.".colorize(:red)
+        puts "Please type \'Y\' to see the main menu, or type \'N\' to exit.".colorize(:green)
         input = gets.strip.downcase
       end
       if input == "y"
