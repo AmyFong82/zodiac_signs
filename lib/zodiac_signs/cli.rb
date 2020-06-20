@@ -6,6 +6,7 @@ class ZodiacSigns::CLI
     greeting
     make_signs
     print_menu
+    ask_for_input
   end
 
   def greeting
@@ -23,29 +24,35 @@ class ZodiacSigns::CLI
       puts "#{index.to_s.rjust(2)}. #{sign.name}: #{sign.dates}"
     end
     puts ""
-    puts "Please enter the number of your zodiac sign from the list above.".colorize(:green)
+  end
+
+  def ask_for_input
+    puts "Please enter number (1-12) from the list above, or type exit to quit.".colorize(:green)
     input = gets.strip.delete "."
-    while input != "exit"
-        # until input.respond_to? :to_i
-        #   puts "Please only enter a number, or type \'exit\'."
-        #   input = gets.strip.delete "."
-        # end
-          sign = ZodiacSigns::Sign.find(input)
-          print_sign(sign)
+    while input.to_i.between?(1,12)
+      sign = ZodiacSigns::Sign.find(input)
+      print_sign(sign)
       puts "Would you like to see another sign? Y or N".colorize(:green)
       input = gets.strip.downcase
-      if input == "y"
-        print_menu
-      elsif input == "n"
-        ending
-      elsif input == "exit"
-        ending
-      else
+      until input == "y" or input == "n"
         puts ""
         puts "I don't understand that answer."
         puts "Please type \'Y\' for to see the main menu, or type \'N\' to exit."
+        input = gets.strip.downcase
+      end
+      if input == "y"
+        print_menu
+      else
+        ending
+      end
+      if input.strip.downcase == "exit"
+        puts "Have a great day!"
+        puts "See you!"
+      else
+        ask_for_input
       end
     end
+
   end
 
   def add_attributes_to_sign(sign)
