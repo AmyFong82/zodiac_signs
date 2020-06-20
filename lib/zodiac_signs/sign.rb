@@ -16,6 +16,9 @@ class ZodiacSigns::Sign
 
   def add_sign_attributes(attributes_hash)
     attributes_hash.each {|key, value| self.send(("#{key}="), value)}
+    if self.name == "Pisces"
+      self.motto = "I Believe."
+    end
     self
   end
 

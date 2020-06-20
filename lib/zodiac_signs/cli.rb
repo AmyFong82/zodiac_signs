@@ -26,8 +26,12 @@ class ZodiacSigns::CLI
     puts "Please enter the number of your zodiac sign from the list above.".colorize(:green)
     input = gets.strip.delete "."
     while input != "exit"
-      sign = ZodiacSigns::Sign.find(input)
-      print_sign(sign)
+        # until input.respond_to? :to_i
+        #   puts "Please only enter a number, or type \'exit\'."
+        #   input = gets.strip.delete "."
+        # end
+          sign = ZodiacSigns::Sign.find(input)
+          print_sign(sign)
       puts "Would you like to see another sign? Y or N".colorize(:green)
       input = gets.strip.downcase
       if input == "y"
