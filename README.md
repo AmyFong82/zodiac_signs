@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Use your zodiac sign to find out how awesome you are. And get insight from today's horoscope.
 
 ## Development
 
