@@ -20,9 +20,14 @@ class ZodiacSigns::CLI
   end
 
   def print_menu
+    puts ""
+    puts "---------------------- 12 Zodiac Signs ----------------------".colorize(:red)
+    puts ""
     ZodiacSigns::Sign.all.each.with_index(1) do |sign, index|
       puts "#{index.to_s.rjust(2)}. #{sign.name}: #{sign.dates}"
     end
+    puts ""
+    puts "-------------------------------------------------------------".colorize(:red)
     puts ""
   end
 
@@ -32,6 +37,8 @@ class ZodiacSigns::CLI
     while input.to_i.between?(1,12)
       sign = ZodiacSigns::Sign.find(input)
       print_sign(sign)
+      puts "---------------------- End of #{sign.name} ----------------------".colorize(:red)
+      puts ""
       puts "Would you like to see another sign? Y or N".colorize(:green)
       input = gets.strip.downcase
       until input == "y" or input == "n" or input == "exit"
