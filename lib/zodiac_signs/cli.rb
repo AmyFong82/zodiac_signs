@@ -45,26 +45,20 @@ class ZodiacSigns::CLI
       else
         ending
       end
-      if input.strip.downcase == "exit"
-        puts "Have a great day!"
-        puts "See you!"
-      else
-        ask_for_input
-      end
     end
-
+    if input.strip.downcase == "exit"
+      puts "Have a great day!"
+      puts "See you!"
+      exit
+    else
+    ask_for_input
+    end
   end
 
   def add_attributes_to_sign(sign)
       attributes = ZodiacSigns::Scraper.scrape_details_page(sign.url)
       sign.add_sign_attributes(attributes)
   end
-  # def add_attributes_to_signs
-  #   ZodiacSigns::Sign.all.each do |sign|
-  #     attributes = ZodiacSigns::Scraper.scrape_details_page(sign.url)
-  #     sign.add_sign_attributes(attributes)
-  #   end
-  # end
 
   def print_sign(sign)
     add_attributes_to_sign(sign)
